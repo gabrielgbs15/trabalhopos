@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fornecedores</title>
+    <style>
+        .aprovado {
+            color: green;
+        }
+        .reprovado {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1>Fornecedores</h1>
+    <form action="/fornecedores" method="post">
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" name="nome" required><br>
+        <label for="condicoes_pagamento">Boas condições de pagamento:</label>
+        <input type="number" id="condicoes_pagamento" name="condicoes_pagamento" min="0" max="10" required><br>
+        <label for="frete_cif">Frete CIF:</label>
+        <input type="number" id="frete_cif" name="frete_cif" min="0" max="10" required><br>
+        <label for="possui_iso">Possui ISO:</label>
+        <input type="number" id="possui_iso" name="possui_iso" min="0" max="10" required><br>
+        <label for="precos_justos">Preços justos:</label>
+        <input type="number" id="precos_justos" name="precos_justos" min="0" max="10" required><br>
+        <label for="boa_indicacao">Boa indicação do mercado:</label>
+        <input type="number" id="boa_indicacao" name="boa_indicacao" min="0" max="10" required><br>
+        <button type="submit">Adicionar Fornecedor</button>
+    </form>
+    <h2>Lista de Fornecedores</h2>
+    <ul>
+        {% for fornecedor in fornecedores %}
+            <li>
+                {{ fornecedor[1] }}: Avaliação geral: {{ fornecedor[2] }}
+                <span class="{% if fornecedor[2] >= 6 %}aprovado{% else %}reprovado{% endif %}">
+                    {% if fornecedor[2] >= 6 %}Aprovado{% else %}Reprovado{% endif %}
+                </span>
+                <form action="/delete_fornecedor/{{ fornecedor[0] }}" method="post" style="display:inline;">
+                    <button type="submit">Deletar</button>
+                </form>
+                <br>
+                Condições de pagamento: {{ fornecedor[3] }},
+                Frete CIF: {{ fornecedor[4] }},
+                Possui ISO: {{ fornecedor[5] }},
+                Preços justos: {{ fornecedor[6] }},
+                Boa indicação do mercado: {{ fornecedor[7] }}
+            </li>
+        {% endfor %}
+    </ul>
+    <a href="/">Voltar</a>
+</body>
+</html>

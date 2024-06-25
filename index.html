@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sistema de Controle</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Sistema de Controle de Documentos e Qualificação de Fornecedores</h1>
+    <nav>
+        <a href="{{ url_for('documentos') }}">Documentos</a>
+        <a href="{{ url_for('fornecedores') }}">Fornecedores</a>
+    </nav>
+</body>
+</html>

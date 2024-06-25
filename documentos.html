@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentos</title>
+</head>
+<body>
+    <h1>Documentos</h1>
+    <form action="/documentos" method="post" enctype="multipart/form-data">
+        <label for="titulo">Título:</label>
+        <input type="text" id="titulo" name="titulo" required><br>
+        <label for="conteudo">Conteúdo:</label>
+        <textarea id="conteudo" name="conteudo" required></textarea><br>
+        <label for="file">Anexo:</label>
+        <input type="file" id="file" name="file"><br>
+        <button type="submit">Adicionar Documento</button>
+    </form>
+    <h2>Lista de Documentos</h2>
+    <ul>
+        {% for documento in documentos %}
+            <li>
+                {{ documento[1] }}: {{ documento[2] }}
+                {% if documento[3] %}
+                    - <a href="/uploads/{{ documento[3] }}">Download</a>
+                {% endif %}
+                <form action="/delete_documento/{{ documento[0] }}" method="post" style="display:inline;">
+                    <button type="submit">Deletar</button>
+                </form>
+            </li>
+        {% endfor %}
+    </ul>
+    <a href="/">Voltar</a>
+</body>
+</html>
